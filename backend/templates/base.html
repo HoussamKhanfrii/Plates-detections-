@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}License Plate Recognition{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <a class="brand" href="{{ url_for('detection.home') }}">
+                <span class="brand-mark"><i data-lucide="scan-line"></i></span>
+                <span>
+                    <strong>PlateVision</strong>
+                    <small>YOLO + OCR</small>
+                </span>
+            </a>
+            <nav class="nav-links">
+                <a href="{{ url_for('detection.home') }}" class="{{ 'active' if request.endpoint == 'detection.home' else '' }}">
+                    <i data-lucide="home"></i><span>Home</span>
+                </a>
+                <a href="{{ url_for('detection.upload_image') }}" class="{{ 'active' if request.endpoint == 'detection.upload_image' else '' }}">
+                    <i data-lucide="image-up"></i><span>Image</span>
+                </a>
+                <a href="{{ url_for('detection.upload_video') }}" class="{{ 'active' if request.endpoint == 'detection.upload_video' else '' }}">
+                    <i data-lucide="film"></i><span>Video</span>
+                </a>
+                <a href="{{ url_for('detection.webcam') }}" class="{{ 'active' if request.endpoint == 'detection.webcam' else '' }}">
+                    <i data-lucide="webcam"></i><span>Webcam</span>
+                </a>
+                <a href="{{ url_for('dashboard.dashboard') }}" class="{{ 'active' if request.endpoint == 'dashboard.dashboard' else '' }}">
+                    <i data-lucide="layout-dashboard"></i><span>Dashboard</span>
+                </a>
+                <a href="{{ url_for('history.history') }}" class="{{ 'active' if request.endpoint == 'history.history' else '' }}">
+                    <i data-lucide="history"></i><span>History</span>
+                </a>
+            </nav>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+                <i data-lucide="sun-moon"></i><span>Theme</span>
+            </button>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">Real-time computer vision platform</p>
+                    <h1>{% block page_title %}License Plate Recognition{% endblock %}</h1>
+                </div>
+                <div class="status-pill">
+                    <span></span>
+                    Local SQLite
+                </div>
+            </header>
+
+            <section class="page-body">
+                {% block content %}{% endblock %}
+            </section>
+        </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

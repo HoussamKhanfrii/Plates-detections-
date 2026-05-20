@@ -1,0 +1,12 @@
+# Update these paths to match your dataset.
+# Expected YOLO format:
+# dataset/
+#   images/train, images/val, images/test
+#   labels/train, labels/val, labels/test
+path: ../datasets/license-plates
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: license_plate

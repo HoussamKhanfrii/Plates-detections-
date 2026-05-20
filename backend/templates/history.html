@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}PlateVision | History{% endblock %}
+{% block page_title %}Detection History{% endblock %}
+
+{% block content %}
+<section class="panel">
+    <form id="historyFilters" class="filter-bar">
+        <label>
+            Plate
+            <input type="search" name="plate" placeholder="12345A6">
+        </label>
+        <label>
+            From
+            <input type="date" name="start_date">
+        </label>
+        <label>
+            To
+            <input type="date" name="end_date">
+        </label>
+        <label>
+            Source
+            <select name="source_type">
+                <option value="">All</option>
+                <option value="image">Image</option>
+                <option value="video">Video</option>
+                <option value="webcam">Webcam</option>
+            </select>
+        </label>
+        <button class="btn primary" type="submit"><i data-lucide="search"></i>Search</button>
+        <a id="exportCsvBtn" class="btn" href="/api/export?format=csv"><i data-lucide="file-spreadsheet"></i>CSV</a>
+        <a id="exportPdfBtn" class="btn" href="/api/export?format=pdf"><i data-lucide="file-text"></i>PDF</a>
+    </form>
+</section>
+
+<section class="panel">
+    <div class="panel-header">
+        <div>
+            <p class="eyebrow">Stored detections</p>
+            <h2>Records</h2>
+        </div>
+        <span id="historyCount" class="source-badge">{{ detections|length }} rows</span>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Plate</th>
+                    <th>Crop</th>
+                    <th>Source</th>
+                    <th>Model</th>
+                    <th>Detection</th>
+                    <th>OCR</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="historyTableBody">
+                {% for item in detections %}
+                <tr>
+                    <td><strong>{{ item.plate_number }}</strong></td>
+                    <td><img class="table-thumb" src="{{ item.plate_crop_path }}" alt="Plate crop"></td>
+                    <td><span class="source-badge">{{ item.source_type }}</span></td>
+                    <td>{{ item.detector_name or "Unknown detector" }}</td>
+                    <td>{{ "%.0f"|format((item.detection_confidence or 0) * 100) }}%</td>
+                    <td>{{ "%.0f"|format((item.ocr_confidence or 0) * 100) }}%</td>
+                    <td>{{ item.created_at }}</td>
+                    <td class="table-actions">
+                        <a class="icon-btn" href="{{ url_for('detection.result_page', detection_id=item.id) }}" title="View"><i data-lucide="eye"></i></a>
+                        <button class="icon-btn danger" type="button" data-delete-id="{{ item.id }}" title="Delete"><i data-lucide="trash-2"></i></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

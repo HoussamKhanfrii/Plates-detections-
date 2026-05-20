@@ -1,0 +1,4 @@
+PLACEHOLDER
+
+Train a YOLO license plate model with training/train_yolo.py or copy a valid
+Ultralytics .pt model to this path before running detection.

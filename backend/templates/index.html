@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}PlateVision | Home{% endblock %}
+{% block page_title %}Real-Time License Plate Detection{% endblock %}
+
+{% block content %}
+<div class="hero-grid">
+    <section class="hero-panel">
+        <div class="hero-copy">
+            <p class="eyebrow">YOLO detection, EasyOCR recognition, Flask dashboard</p>
+            <h2>Detect plates from images, videos, and webcam streams.</h2>
+            <p>
+                Upload media, process frames, crop plates automatically, clean OCR output,
+                store detections, and review operational statistics from one local app.
+            </p>
+            <div class="hero-actions">
+                <a class="btn primary" href="{{ url_for('detection.upload_image') }}"><i data-lucide="image-up"></i>Image Detection</a>
+                <a class="btn" href="{{ url_for('detection.upload_video') }}"><i data-lucide="film"></i>Video Detection</a>
+                <a class="btn" href="{{ url_for('detection.webcam') }}"><i data-lucide="webcam"></i>Webcam</a>
+            </div>
+        </div>
+        <div class="pipeline-strip">
+            <span>Input</span>
+            <i data-lucide="arrow-right"></i>
+            <span>YOLO</span>
+            <i data-lucide="arrow-right"></i>
+            <span>Crop</span>
+            <i data-lucide="arrow-right"></i>
+            <span>OCR</span>
+            <i data-lucide="arrow-right"></i>
+            <span>SQLite</span>
+        </div>
+    </section>
+
+    <section class="quick-actions">
+        <a class="action-card" href="{{ url_for('dashboard.dashboard') }}">
+            <i data-lucide="bar-chart-3"></i>
+            <strong>Dashboard</strong>
+            <span>Track totals, confidence averages, sources, and daily volume.</span>
+        </a>
+        <a class="action-card" href="{{ url_for('history.history') }}">
+            <i data-lucide="database"></i>
+            <strong>Detection History</strong>
+            <span>Search plate numbers, filter dates, inspect crops, and export reports.</span>
+        </a>
+    </section>
+</div>
+{% endblock %}

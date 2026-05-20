@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}PlateVision | Webcam{% endblock %}
+{% block page_title %}Webcam Detection{% endblock %}
+
+{% block content %}
+<div class="workspace-grid two-column webcam-grid">
+    <section class="panel">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Live stream</p>
+                <h2>Camera feed</h2>
+            </div>
+            <div class="control-row">
+                <button id="startWebcamBtn" class="icon-btn success" type="button" title="Start webcam"><i data-lucide="play"></i></button>
+                <button id="stopWebcamBtn" class="icon-btn danger" type="button" title="Stop webcam"><i data-lucide="square"></i></button>
+            </div>
+        </div>
+        <div class="webcam-frame">
+            <img id="webcamStream" alt="Webcam stream">
+            <div id="webcamPlaceholder" class="empty-state">
+                <i data-lucide="webcam"></i>
+                <p>Start the webcam to begin live detection.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Latest match</p>
+                <h2>Recognized plate</h2>
+            </div>
+            <i data-lucide="badge-check"></i>
+        </div>
+        <div id="latestWebcamDetection" class="plate-display">
+            <span class="plate-number muted">No plate yet</span>
+            <small>Duplicate plates are ignored for 10 seconds.</small>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+flask>=3.0.0
+ultralytics>=8.2.0
+opencv-python>=4.9.0
+easyocr>=1.7.1
+numpy>=1.26.0
+pandas>=2.2.0
+pillow>=10.0.0
+matplotlib>=3.8.0
+werkzeug>=3.0.0
+reportlab>=4.2.0

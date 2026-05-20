@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}PlateVision | Result{% endblock %}
+{% block page_title %}Detection Result{% endblock %}
+
+{% block content %}
+{% if error %}
+<div class="alert error">{{ error }}</div>
+{% elif detection %}
+<div class="workspace-grid result-layout">
+    <section class="panel">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Plate number</p>
+                <h2>{{ detection.plate_number }}</h2>
+            </div>
+            <span class="source-badge">{{ detection.source_type }}</span>
+        </div>
+        <div class="metric-grid compact">
+            <div class="metric-card">
+                <span>Detection</span>
+                <strong>{{ "%.0f"|format((detection.detection_confidence or 0) * 100) }}%</strong>
+            </div>
+            <div class="metric-card">
+                <span>OCR</span>
+                <strong>{{ "%.0f"|format((detection.ocr_confidence or 0) * 100) }}%</strong>
+            </div>
+        </div>
+        <dl class="detail-list">
+            <dt>Raw OCR</dt>
+            <dd>{{ detection.raw_ocr_text }}</dd>
+            <dt>Model</dt>
+            <dd>{{ detection.detector_name or "Unknown detector" }}</dd>
+            <dt>Created</dt>
+            <dd>{{ detection.created_at }}</dd>
+        </dl>
+    </section>
+
+    <section class="panel media-panel">
+        <h2>Image with bounding box</h2>
+        <img src="{{ detection.result_image_path }}" alt="Detection result">
+    </section>
+    <section class="panel media-panel">
+        <h2>Cropped plate</h2>
+        <img src="{{ detection.plate_crop_path }}" alt="Cropped plate">
+    </section>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}PlateVision | Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-stack">
+    <section class="metric-grid">
+        <div class="metric-card">
+            <span>Total detections</span>
+            <strong id="totalDetections">0</strong>
+        </div>
+        <div class="metric-card">
+            <span>Today</span>
+            <strong id="detectionsToday">0</strong>
+        </div>
+        <div class="metric-card">
+            <span>Avg detection</span>
+            <strong id="avgDetectionConfidence">0%</strong>
+        </div>
+        <div class="metric-card">
+            <span>Avg OCR</span>
+            <strong id="avgOcrConfidence">0%</strong>
+        </div>
+    </section>
+
+    <section class="chart-grid">
+        <div class="panel">
+            <div class="panel-header">
+                <h2>Detection count by day</h2>
+                <i data-lucide="line-chart"></i>
+            </div>
+            <canvas id="detectionsByDayChart"></canvas>
+        </div>
+        <div class="panel">
+            <div class="panel-header">
+                <h2>Source distribution</h2>
+                <i data-lucide="pie-chart"></i>
+            </div>
+            <canvas id="sourceDistributionChart"></canvas>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Latest records</p>
+                <h2>Recent detections</h2>
+            </div>
+            <a class="btn small" href="{{ url_for('history.history') }}"><i data-lucide="history"></i>History</a>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Plate</th>
+                        <th>Source</th>
+                        <th>Model</th>
+                        <th>Detection</th>
+                        <th>OCR</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody id="recentDetectionsBody"></tbody>
+            </table>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

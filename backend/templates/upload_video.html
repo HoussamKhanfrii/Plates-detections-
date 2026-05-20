@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}PlateVision | Video Detection{% endblock %}
+{% block page_title %}Video Detection{% endblock %}
+
+{% block content %}
+<div class="workspace-grid two-column">
+    <section class="panel">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Frame-by-frame inference</p>
+                <h2>Upload a video</h2>
+            </div>
+            <i data-lucide="film"></i>
+        </div>
+
+        <form id="videoUploadForm" class="upload-form">
+            <label class="drop-zone" for="videoInput" data-drop-zone>
+                <input id="videoInput" name="video" type="file" accept="video/*" hidden>
+                <i data-lucide="file-video"></i>
+                <strong>Drop video here</strong>
+                <span>MP4, AVI, MOV, MKV, WEBM</span>
+            </label>
+            <video id="videoPreview" class="media-preview" controls></video>
+            <button class="btn primary wide" type="submit">
+                <i data-lucide="play-circle"></i>
+                Process Video
+            </button>
+        </form>
+    </section>
+
+    <section class="panel result-panel">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Processed media</p>
+                <h2>Detections</h2>
+            </div>
+            <div class="loader hidden" id="videoLoader"></div>
+        </div>
+        <div id="videoResult" class="empty-state">
+            <i data-lucide="list-video"></i>
+            <p>Processed video and detected plates will appear here.</p>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+*.log
+
+# Local configuration and databases
+.env
+database/*.db
+database/*.sqlite
+database/*.sqlite3
+
+# Runtime uploads and generated media
+backend/static/uploads/*
+backend/static/results/*
+backend/static/crops/*
+backend/static/videos/*
+!backend/static/uploads/.gitkeep
+!backend/static/results/.gitkeep
+!backend/static/crops/.gitkeep
+!backend/static/videos/.gitkeep
+
+# Trained models and experiment outputs
+backend/models/*.pt
+!backend/models/plate_detector.pt
+training/runs/
+runs/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
